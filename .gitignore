@@ -1,0 +1,69 @@
+# Java 관련 무시 파일
+*.class
+*.log
+*.ctxt
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+
+# Gradle 관련 무시 파일
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Gradle Wrapper 실행 파일 무시 (시스템에 따라 gradlew/gradlew.bat 사용을 권장)
+# gradlew
+# gradlew.bat
+
+# IntelliJ IDEA 관련 무시 파일
+.idea/
+*.iml
+*.iws
+out/
+*.ipr
+*.ids
+*.idb
+.idea_modules/
+
+# Mac OS 파일 시스템 관련 무시 파일
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# VSCode 관련 무시 파일
+.vscode/
+
+# Eclipse 관련 무시 파일
+.classpath
+.project
+.settings/
+
+# Other files and directories to ignore
+tmp/
+temp/
