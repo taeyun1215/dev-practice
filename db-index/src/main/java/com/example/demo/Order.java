@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(indexes = {@Index(name = "idx_customer_order", columnList = "customerId, orderDate DESC")})
+//@Table(indexes = {@Index(name = "idx_customer_order", columnList = "customerId, orderDate DESC")})
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,5 +21,5 @@ public class Order {
     private Long customerId;
 
     @Column(nullable = false)
-    private LocalDateTime orderDate;
+    private LocalDateTime createDate;
 }
