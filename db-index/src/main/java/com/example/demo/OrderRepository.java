@@ -8,4 +8,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     // 특정 고객의 최근 주문순 조회
     List<Order> findByCustomerIdOrderByCreateDateDesc(Long customerId);
+
+    // 특정 고객의 주문순 조회
+    List<Order> findByCustomerId(Long customerId);
 }

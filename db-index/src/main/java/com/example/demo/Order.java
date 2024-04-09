@@ -2,16 +2,19 @@ package com.example.demo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-//@Table(indexes = {@Index(name = "idx_customer_order", columnList = "customerId, orderDate DESC")})
+@Table(name = "`order`")
+//@Table(name = "`order`", indexes = {@Index(name = "idx_customer_order", columnList = "customerId")})
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
