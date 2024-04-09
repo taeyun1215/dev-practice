@@ -24,7 +24,7 @@ SELECT * FROM PLAYER WHERE NAME = ?
 - 특정 내용을 찾고자 할 때, 목차가 없으면 책의 매 페이지를 뒤져야 하듯이, 데이터베이스도 비슷한 방식으로 원하는 정보가 나올 때까지 모든 데이터를 살펴봐야 한다.
 - 테이블에 데이터가 많을수록 이런 검색 과정에 소요되는 시간은 더욱 길어지게 된다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee8ffeef-333e-486c-842a-73ee46ce3b12/22c7f99d-55f5-46d2-9249-655542158cbf/Untitled.png)
+![image](https://github.com/taeyun1215/dev-practice/assets/65766105/67a02f13-ed6f-4bd9-8925-1f6a36d9f9ac)
 
 ```sql
 CREATE INDEX PLAYER_NAME_INDEX ON USER(NAME);
@@ -47,26 +47,16 @@ CREATE INDEX PLAYER_NAME_INDEX ON USER(NAME);
 - 사용 사례
     - **관계형 데이터베이스 시스템**: 대부분의 SQL 기반 데이터베이스 시스템에서 기본 인덱스 구조로 사용된다. 복잡한 쿼리 조건과 다양한 데이터 액세스 패턴을 지원해야 하는 시스템에 적합하다.
 - 예시 : Index가 1부터 14까지 있는 B-Tree이다.
-
-  ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee8ffeef-333e-486c-842a-73ee46ce3b12/d527a025-c722-4088-93bb-9c2558e4fa0c/Untitled.png)
-
+  ![image](https://github.com/taeyun1215/dev-practice/assets/65766105/3447d112-34c9-43ec-83a1-9f92979b8eed)
     - 기존 B-Tree가 이렇게 구성이 되어 있을 때, 이제 15 Index를 추가하면 아래와 같이 된다.
-
-      ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee8ffeef-333e-486c-842a-73ee46ce3b12/242145d7-f4ba-49f7-a513-60e26eef05ab/Untitled.png)
-
+      ![image](https://github.com/taeyun1215/dev-practice/assets/65766105/54afe815-a33f-4267-8ac8-78791a2f8c36)
     - Index 15는 8보다 크고 12보다 크고 14보다 크므로 14의 오른쪽 node로 추가가 된다.
     - 하지만 이진 트리이기에 13, 14, 15중에 가운데인 14가 승격한다.
-
-      ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee8ffeef-333e-486c-842a-73ee46ce3b12/3b4e172a-6c29-4d1b-87d1-70608da85e79/Untitled.png)
-
+      ![image](https://github.com/taeyun1215/dev-practice/assets/65766105/f8e4d84b-d0ef-4d3a-93b3-8e30eccd434c)
     - 또다시 10, 12, 14에서 중간인 12가 다시 승격한다.
-
-      ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee8ffeef-333e-486c-842a-73ee46ce3b12/181a8aa5-a4aa-4d86-b400-6202b7ee639a/Untitled.png)
-
+      ![image](https://github.com/taeyun1215/dev-practice/assets/65766105/86a2f893-65cd-42b6-8a3f-011aba4f6bfc)
     - 또다시 4, 8, 12에서 중간인 8이 승격하여 Root Node가 된다.
-
-      ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee8ffeef-333e-486c-842a-73ee46ce3b12/4f3151c2-d57d-42bd-9114-da483ed26c91/Untitled.png)
-
+      ![image](https://github.com/taeyun1215/dev-practice/assets/65766105/d640daf0-d5ad-4696-b7b9-b01b601a0caf)
     - 위 B-Tree를 체험해볼 수 있는 링크는 아래와 같다.
         - https://www.cs.usfca.edu/~galles/visualization/BTree.html
 
@@ -154,14 +144,10 @@ CREATE INDEX PLAYER_NAME_INDEX ON USER(NAME);
 
     - 임의로 100만건 데이터를 추가하여 쿼리를 조회해보았다.
     - 인덱스가 걸려있지 않은 쿼리 속도
-
-      ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee8ffeef-333e-486c-842a-73ee46ce3b12/3d9d8b02-d077-48c5-8f38-aa4378b86699/Untitled.png)
-
+      ![image](https://github.com/taeyun1215/dev-practice/assets/65766105/e23b9433-d1eb-4927-97d5-1f4fc8ae4246)
         - 0.44ms의 속도를 보여주고 있다.
     - 인덱스가 걸려있는 쿼리 속도
-
-      ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee8ffeef-333e-486c-842a-73ee46ce3b12/fa93322a-6286-47bc-8874-f5bfc2fa5332/Untitled.png)
-
+      ![image](https://github.com/taeyun1215/dev-practice/assets/65766105/bc4d7cce-57b8-492e-bb42-4d290d954d2a)
         - 0.36ms의 속도를 보여주고 있다.
     - 두 속도차이는 그렇게 큰 속도차이는 아니지만 100만건 조회 치고는 나쁘지 않은 성능을 보이고 있다.
     - 단, 우리가 간과한 부분이 있다.
@@ -237,14 +223,10 @@ CREATE INDEX PLAYER_NAME_INDEX ON USER(NAME);
 
     - 이번엔 10만건 데이터를 추가하여 쿼리를 조회해보았다.
     - 인덱스가 걸려있지 않은 쿼리 속도
-
-      ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee8ffeef-333e-486c-842a-73ee46ce3b12/fe7e2f2e-df0f-4695-af06-8fd63088f9a9/Untitled.png)
-
+      ![image](https://github.com/taeyun1215/dev-practice/assets/65766105/740bdec2-ae44-46c4-ab95-dfad4ccc1585)
         - 0.15ms의 속도를 보여주고 있다.
     - 인덱스가 걸려있는 쿼리 속도
-
-      ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee8ffeef-333e-486c-842a-73ee46ce3b12/3020ba87-9156-42bb-99e5-93459fdcc041/Untitled.png)
-
+      ![image](https://github.com/taeyun1215/dev-practice/assets/65766105/d4274418-bef1-46b6-a220-593a8f3b0b30)
         - 0.11ms의 속도를 보여주고 있다.
     - 이번엔 아까보다 더 유의미한 결과를 보여주고 있다. 대충 계산해보면 30% 이상의 효율을 보여주는 것 같다.
     - 심지어 아까는 100만 Row였고 지금은 10만 Row였는데도 이런 유의미한 차이를 내는걸 보아 데이터가 많아질수록 더 큰 이점을 보일 것으로 예상이든다.
@@ -252,9 +234,7 @@ CREATE INDEX PLAYER_NAME_INDEX ON USER(NAME);
 ## **4. 인덱스 동작 원리**
 
 ### 인덱스 구조
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee8ffeef-333e-486c-842a-73ee46ce3b12/0ffa315d-0729-4219-bef9-46ebc4124e2c/Untitled.png)
-
+![image](https://github.com/taeyun1215/dev-practice/assets/65766105/fea04e9c-28ff-42a2-84e9-74e526ade13f)
 - **노드와 키**: 인덱스는 키와 포인터로 구성된 노드들의 집합으로, 키는 데이터를 정렬하고 탐색하는 기준이 되며, 포인터는 실제 데이터 또는 다음 노드를 가리킨다.
 - **리프 노드와 내부 노드**: B-Tree 인덱스에서 리프 노드는 실제 데이터의 위치를 가리키는 포인터를 포함하고, 내부 노드는 트리의 탐색 경로를 결정하는 데 사용된다.
 
