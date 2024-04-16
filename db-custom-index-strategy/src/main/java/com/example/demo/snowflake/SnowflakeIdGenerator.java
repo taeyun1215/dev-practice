@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.snowflake;
 
 import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;

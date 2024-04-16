@@ -1,4 +1,4 @@
-package com.example.demo.uuid;
+package com.example.demo.ulid;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,15 +15,15 @@ import java.util.UUID;
 @Entity
 @Getter
 @Builder
-@Table(name = "user_uuid")
+@Table(name = "user_ulid")
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserUUID {
+public class UserULID {
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private UUID id;
+    @GeneratedValue(generator = "ulid-generator")
+    @GenericGenerator(name = "ulid-generator", strategy = "com.example.demo.ulid.ULIDGenerator")
+    private String id;
 
     private String name;
     private String email;

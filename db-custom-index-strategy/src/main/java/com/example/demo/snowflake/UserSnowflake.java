@@ -1,20 +1,17 @@
-package com.example.demo.custom;
+package com.example.demo.snowflake;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.UUID;
 
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserCustom {
+public class UserSnowflake {
 
     @Id
     private Long id;
