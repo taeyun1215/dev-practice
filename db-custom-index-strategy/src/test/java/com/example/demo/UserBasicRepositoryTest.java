@@ -29,7 +29,7 @@ public class UserBasicRepositoryTest {
 
         stopWatch.stop();
 
-        System.out.println("Query time with index: " + stopWatch.getTotalTimeSeconds() + " seconds");
+        System.out.println("Auto Insert Time: " + stopWatch.getTotalTimeSeconds() + " seconds");
         System.out.println(stopWatch.prettyPrint());
     }
 }

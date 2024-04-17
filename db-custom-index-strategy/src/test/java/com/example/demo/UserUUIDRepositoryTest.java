@@ -29,7 +29,7 @@ public class UserUUIDRepositoryTest {
 
         stopWatch.stop();
 
-        System.out.println("Query time with index: " + stopWatch.getTotalTimeSeconds() + " seconds");
+        System.out.println("UUID Insert Time: " + stopWatch.getTotalTimeSeconds() + " seconds");
         System.out.println(stopWatch.prettyPrint());
     }
 }
