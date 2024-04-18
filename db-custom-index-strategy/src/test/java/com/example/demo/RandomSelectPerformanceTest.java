@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @SpringBootTest
-public class RandomPerformanceTest {
+public class RandomSelectPerformanceTest {
 
     @Autowired
     private UserBasicRepository userBasicRepository;
@@ -50,7 +50,7 @@ public class RandomPerformanceTest {
         }
         stopWatch.stop();
 
-        System.out.println("Auto Increment Key:" + stopWatch.getTotalTimeSeconds() + " seconds");
+        System.out.println("Random Auto Select Key:" + stopWatch.getTotalTimeSeconds() + " seconds");
         System.out.println(stopWatch.prettyPrint());
     }
 
@@ -76,7 +76,7 @@ public class RandomPerformanceTest {
         }
         stopWatch.stop();
 
-        System.out.println("UUID Key: " + stopWatch.getTotalTimeSeconds() + " seconds");
+        System.out.println("Random UUID Select Key: " + stopWatch.getTotalTimeSeconds() + " seconds");
         System.out.println(stopWatch.prettyPrint());
     }
 
@@ -102,7 +102,7 @@ public class RandomPerformanceTest {
         }
         stopWatch.stop();
 
-        System.out.println("ULID Key: " + stopWatch.getTotalTimeSeconds() + " seconds");
+        System.out.println("Random ULID Select Key: " + stopWatch.getTotalTimeSeconds() + " seconds");
         System.out.println(stopWatch.prettyPrint());
     }
 }

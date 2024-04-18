@@ -12,12 +12,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.StopWatch;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
 @SpringBootTest
-public class SortPerformanceTest {
+public class SortSelectPerformanceTest {
 
     @Autowired
     private UserBasicRepository userBasicRepository;
