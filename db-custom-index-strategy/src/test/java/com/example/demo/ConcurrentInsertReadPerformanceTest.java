@@ -35,12 +35,14 @@ public class ConcurrentInsertReadPerformanceTest {
 
         // 삽입 작업
         Runnable insertTask = () -> {
-            List<UserBasic> usersBasic = new ArrayList<>();
-
             for (int i = 0; i < 100000; i++) {
-                usersBasic.add(UserBasic.builder().email("email" + i).name("name" + i).build());
+                userBasicRepository.save(
+                        UserBasic.builder()
+                                .email("email" + i)
+                                .name("name" + i)
+                                .build()
+                );
             }
-            userBasicRepository.saveAll(usersBasic);
         };
 
         // 조회 작업 (시간 측정)
@@ -50,10 +52,11 @@ public class ConcurrentInsertReadPerformanceTest {
             Collections.shuffle(basicIds);
 
             StopWatch stopWatch = new StopWatch();
-            stopWatch.start("UUID Read Performance");
+            stopWatch.start("Basic Read Performance");
             basicIds.forEach(id -> userBasicRepository.findById(id));
             stopWatch.stop();
 
+            System.out.println("Auto Concurrent Insert, Select: " + stopWatch.getTotalTimeSeconds() + " seconds");
             System.out.println(stopWatch.prettyPrint());
         };
 
@@ -74,12 +77,14 @@ public class ConcurrentInsertReadPerformanceTest {
 
         // 삽입 작업
         Runnable insertTask = () -> {
-            List<UserUUID> usersUUID = new ArrayList<>();
-
             for (int i = 0; i < 100000; i++) {
-                usersUUID.add(UserUUID.builder().email("email" + i).name("name" + i).build());
+                userUUIDRepository.save(
+                        UserUUID.builder()
+                                .email("email" + i)
+                                .name("name" + i)
+                                .build()
+                );
             }
-            userUUIDRepository.saveAll(usersUUID);
         };
 
         // 조회 작업 (시간 측정)
@@ -93,6 +98,7 @@ public class ConcurrentInsertReadPerformanceTest {
             uuidIds.forEach(id -> userUUIDRepository.findById(id));
             stopWatch.stop();
 
+            System.out.println("UUID Concurrent Insert, Select: " + stopWatch.getTotalTimeSeconds() + " seconds");
             System.out.println(stopWatch.prettyPrint());
         };
 
@@ -113,12 +119,14 @@ public class ConcurrentInsertReadPerformanceTest {
 
         // 삽입 작업
         Runnable insertTask = () -> {
-            List<UserULID> usersULID = new ArrayList<>();
-
             for (int i = 0; i < 100000; i++) {
-                usersULID.add(UserULID.builder().email("email" + i).name("name" + i).build());
+                userULIDRepository.save(
+                        UserULID.builder()
+                                .email("email" + i)
+                                .name("name" + i)
+                                .build()
+                );
             }
-            userULIDRepository.saveAll(usersULID);
         };
 
         // 조회 작업 (시간 측정)
@@ -128,10 +136,11 @@ public class ConcurrentInsertReadPerformanceTest {
             Collections.shuffle(ulidIds);
 
             StopWatch stopWatch = new StopWatch();
-            stopWatch.start("UUID Read Performance");
+            stopWatch.start("ULID Read Performance");
             ulidIds.forEach(id -> userULIDRepository.findById(id));
             stopWatch.stop();
 
+            System.out.println("ULID Concurrent Insert, Select: " + stopWatch.getTotalTimeSeconds() + " seconds");
             System.out.println(stopWatch.prettyPrint());
         };
 

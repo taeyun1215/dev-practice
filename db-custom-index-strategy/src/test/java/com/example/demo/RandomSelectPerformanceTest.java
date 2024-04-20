@@ -50,7 +50,7 @@ public class RandomSelectPerformanceTest {
         }
         stopWatch.stop();
 
-        System.out.println("Random Auto Select Key:" + stopWatch.getTotalTimeSeconds() + " seconds");
+        System.out.println("Random Auto Select: " + stopWatch.getTotalTimeSeconds() + " seconds");
         System.out.println(stopWatch.prettyPrint());
     }
 
@@ -76,7 +76,7 @@ public class RandomSelectPerformanceTest {
         }
         stopWatch.stop();
 
-        System.out.println("Random UUID Select Key: " + stopWatch.getTotalTimeSeconds() + " seconds");
+        System.out.println("Random UUID Select: " + stopWatch.getTotalTimeSeconds() + " seconds");
         System.out.println(stopWatch.prettyPrint());
     }
 
@@ -102,7 +102,7 @@ public class RandomSelectPerformanceTest {
         }
         stopWatch.stop();
 
-        System.out.println("Random ULID Select Key: " + stopWatch.getTotalTimeSeconds() + " seconds");
+        System.out.println("Random ULID Select : " + stopWatch.getTotalTimeSeconds() + " seconds");
         System.out.println(stopWatch.prettyPrint());
     }
 }
