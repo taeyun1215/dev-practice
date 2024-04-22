@@ -31,6 +31,15 @@ dependencies {
 
     // h2 (test 전용)
     testImplementation 'com.h2database:h2:1.4.200'
+
+    // Test Containers (test 전용)
+    testImplementation 'org.testcontainers:testcontainers:1.17.6'
+
+    // Junit (test 전용)
+    testImplementation 'org.testcontainers:junit-jupiter:1.17.6'
+
+    // MariaDB (test 전용)
+    testImplementation 'org.testcontainers:mariadb:1.17.6'
 }
 
 tasks.named('test') {
