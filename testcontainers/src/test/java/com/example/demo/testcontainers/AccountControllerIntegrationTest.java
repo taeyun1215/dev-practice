@@ -1,57 +1,61 @@
 package com.example.demo.testcontainers;
 
+import com.example.demo.Account;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
-import org.springframework.test.web.servlet.MockMvc;
-import org.testcontainers.containers.MariaDBContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@Testcontainers
-public class AccountControllerIntegrationTest {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class AccountControllerIntegrationTest extends IntegrationTestSupport {
 
-    @Container
-    public static MariaDBContainer<?> mariaDBContainer = new MariaDBContainer<>("mariadb:10.5")
-            .withDatabaseName("testdb")
-            .withUsername("test")
-            .withPassword("test")
-            .withReuse(true);
-
-    @DynamicPropertySource
-    static void setDataSourceProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", mariaDBContainer::getJdbcUrl);
-        registry.add("spring.datasource.username", mariaDBContainer::getUsername);
-        registry.add("spring.datasource.password", mariaDBContainer::getPassword);
-        registry.add("spring.datasource.driver-class-name", () -> "org.mariadb.jdbc.Driver");
-    }
+    @LocalServerPort
+    private int port;
 
     @Autowired
-    private MockMvc mockMvc;
+    private TestRestTemplate restTemplate;
+
+    private String getBaseUri() {
+        return "http://localhost:" + port + "/api/accounts";
+    }
 
     @Test
-    public void testAccountCreationAndRetrieval() throws Exception {
-        String accountJson = "{\"owner\":\"John Doe\",\"balance\":1000.0}";
+    void testCreateAccount() {
+        // 계정 생성 요청
+        Account account = Account.builder()
+                .owner("John Doe")
+                .balance(1000.0)
+                .build();
+        ResponseEntity<Account> response = restTemplate.postForEntity(getBaseUri(), account, Account.class);
 
-        mockMvc.perform(post("/api/accounts")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(accountJson))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.owner").value("John Doe"))
-                .andExpect(jsonPath("$.balance").value(1000.0));
+        // 결과 검증
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody().getOwner()).isEqualTo("John Doe");
+        assertThat(response.getBody().getBalance()).isEqualTo(1000.0);
+    }
 
-        mockMvc.perform(get("/api/accounts/1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.owner").value("John Doe"))
-                .andExpect(jsonPath("$.balance").value(1000.0));
+    @Test
+    void testGetAccountById() {
+        // 계정 생성 및 ID 획득
+        Account account = Account.builder()
+                .owner("Jane Doe")
+                .balance(500.0)
+                .build();
+        Account savedAccount = restTemplate.postForObject(getBaseUri(), account, Account.class);
+
+        // 생성된 계정 ID로 조회
+        ResponseEntity<Account> response = restTemplate.getForEntity(getBaseUri() + "/" + savedAccount.getId(), Account.class);
+
+        // 결과 검증
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody().getId()).isEqualTo(savedAccount.getId());
+        assertThat(response.getBody().getOwner()).isEqualTo("Jane Doe");
     }
 }

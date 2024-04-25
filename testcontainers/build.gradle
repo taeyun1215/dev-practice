@@ -19,6 +19,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     // JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -27,19 +28,17 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-    // h2 (test 전용)
-    testImplementation 'com.h2database:h2:1.4.200'
-
-    // Test Containers (test 전용)
-    testImplementation 'org.testcontainers:testcontainers:1.17.6'
+    // MariaDB
+    implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.2'
 
     // Junit (test 전용)
     testImplementation 'org.testcontainers:junit-jupiter:1.17.6'
 
     // MariaDB (test 전용)
     testImplementation 'org.testcontainers:mariadb:1.17.6'
+
+    // Kafka (test 전용)
+//    testImplementation "org.testcontainers:kafka:1.17.6"
 }
 
 tasks.named('test') {
