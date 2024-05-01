@@ -1,6 +1,6 @@
 package com.example.demo.testcontainers;
 
-import com.example.demo.Account;
+import com.example.demo.model.Account;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
