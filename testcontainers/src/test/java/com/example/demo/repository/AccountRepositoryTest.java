@@ -1,8 +1,6 @@
-제package com.example.demo.repository;
+package com.example.demo.repository;
 
 import com.example.demo.model.Account;
-import com.example.demo.repository.AccountRepository;
-import com.example.demo.testcontainers.IntegrationTestSupport;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -13,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 
 @DataJpaTest
-public class AccountRepositoryTest extends IntegrationTestSupport {
+class AccountRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;
