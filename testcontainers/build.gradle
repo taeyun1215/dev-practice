@@ -31,8 +31,11 @@ dependencies {
     // MariaDB
     implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.2'
 
-    // Junit (test 전용)
+    // Junit
     testImplementation 'org.testcontainers:junit-jupiter:1.17.6'
+
+    // H2 (test 전용)
+    testImplementation 'com.h2database:h2'
 
     // MariaDB (test 전용)
     testImplementation 'org.testcontainers:mariadb:1.17.6'
