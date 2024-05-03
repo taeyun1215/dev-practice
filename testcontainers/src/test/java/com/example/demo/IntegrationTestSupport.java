@@ -1,4 +1,4 @@
-package com.example.demo.testcontainers;
+package com.example.demo;
 
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;

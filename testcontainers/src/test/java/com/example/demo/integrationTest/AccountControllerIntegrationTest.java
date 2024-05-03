@@ -1,6 +1,7 @@
-package com.example.demo.testcontainers;
+package com.example.demo.integrationTest;
 
 import com.example.demo.model.Account;
+import com.example.demo.IntegrationTestSupport;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
