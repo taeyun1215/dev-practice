@@ -16,11 +16,5 @@ public class IntegrationTestSupport {
     // MariaDB 컨테이너 설정
     @Container
     static MariaDBContainer<?> MARIADB_CONTAINER = new MariaDBContainer<>("mariadb:10.11");
-//            .withDatabaseName("testdb")
-//            .withUsername("testuser")
-//            .withPassword("testpass");
 
-//    static {
-//        MARIADB_CONTAINER.start();
-//    }
 }
