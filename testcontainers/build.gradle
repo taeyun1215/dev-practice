@@ -47,10 +47,10 @@ dependencies {
     testImplementation 'org.testcontainers:mariadb:1.17.6'
 
     // Redis (test 전용)
-    testImplementation 'org.testcontainers:redis:1.17.6'
+//    testImplementation 'org.testcontainers:redis:1.17.6'
 
     // Kafka (test 전용)
-    testImplementation "org.testcontainers:kafka:1.17.6"
+//    testImplementation "org.testcontainers:kafka:1.17.6"
 }
 
 tasks.named('test') {
