@@ -2,7 +2,6 @@ package com.example.demo.rdbms.core;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.demo.ExampleEntity;
 import com.example.demo.ExampleRepository;
 import com.example.demo.rdbms.CoreDbContextTest;
 

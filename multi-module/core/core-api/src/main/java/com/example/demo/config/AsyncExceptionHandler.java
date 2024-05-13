@@ -1,7 +1,5 @@
 package com.example.demo.config;
 
-import com.example.demo.support.error.CoreApiException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;

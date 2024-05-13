@@ -14,10 +14,7 @@ import static org.springframework.restdocs.request.RequestDocumentation.paramete
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.restdocs.request.RequestDocumentation.queryParameters;
 
-import com.example.demo.controller.v1.ExampleController;
 import com.example.demo.controller.v1.request.ExampleRequestDto;
-import com.example.demo.domain.ExampleResult;
-import com.example.demo.domain.ExampleService;
 import com.example.demo.RestDocsTest;
 import io.restassured.http.ContentType;
 
