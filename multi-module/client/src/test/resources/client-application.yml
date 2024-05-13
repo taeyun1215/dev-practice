@@ -3,4 +3,4 @@ spring.application.name: client-test
 spring:
   config:
     import:
-      - client.yml
+      - client-application.yml

@@ -20,24 +20,11 @@ public abstract class BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@CreationTimestamp
 	@Column
+	@CreationTimestamp
 	private LocalDateTime createdAt;
 
-	@UpdateTimestamp
 	@Column
+	@UpdateTimestamp
 	private LocalDateTime updatedAt;
-
-	public Long getId() {
-		return id;
-	}
-
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
-	}
-
 }
