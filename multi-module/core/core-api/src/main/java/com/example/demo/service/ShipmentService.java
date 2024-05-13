@@ -8,7 +8,7 @@ import com.example.demo.Shipment;
 import com.example.demo.ShipmentRepository;
 import com.example.demo.ShipmentStatus;
 import com.example.demo.controller.v1.payload.CreateShipmentDto;
-import com.example.demo.support.error.ShipmentNotFoundException;
+import com.example.demo.support.error.InvalidShipmentRequestException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +20,10 @@ public class ShipmentService {
 	private final NotificationServiceClient notificationServiceClient;
 
 	public Long createShipment(CreateShipmentDto.CreateShipmentRequest request) {
+		if (request.trackingNumber() == null || request.trackingNumber().isEmpty()) {
+			throw new InvalidShipmentRequestException("Invalid or missing tracking number.");
+		}
+
 		Shipment shipment = new Shipment();
 		shipment.setTrackingNumber(request.trackingNumber());
 		shipment.setStatus(ShipmentStatus.PENDING.toString()); // 초기 상태 설정

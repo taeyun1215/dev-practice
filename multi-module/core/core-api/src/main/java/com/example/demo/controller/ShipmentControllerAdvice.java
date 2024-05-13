@@ -15,5 +15,4 @@ public class ShipmentControllerAdvice {
 	public ErrorApiResponse handleEmailNotFoundException(Exception ex) {
 		return ErrorApiResponse.of(HttpStatus.UNAUTHORIZED.value(), ex.getMessage());
 	}
-
 }

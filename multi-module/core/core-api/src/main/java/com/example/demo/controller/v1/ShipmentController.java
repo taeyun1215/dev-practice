@@ -1,15 +1,11 @@
 package com.example.demo.controller.v1;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.ShipmentStatus;
 import com.example.demo.controller.v1.payload.CreateShipmentDto;
 import com.example.demo.service.ShipmentService;
 import com.example.demo.support.response.SuccessApiResponse;
