@@ -1,0 +1,9 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+notification:
+  service:
+    url: https://dev-notification-server.com
+    exampleValue: devNotificationValue

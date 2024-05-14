@@ -1,44 +1,30 @@
-notification:
-  service:
-    url: https://notification-server.com
-    exampleValue: exampleNotificationValue
-
-spring.cloud.openfeign:
-  client:
-    config:
-      example-api:
-        connectTimeout: 2100
-        readTimeout: 5000
-        loggerLevel: full
-  compression:
-    response:
-      enabled: false
-  httpclient:
-    max-connections: 2000
-    max-connections-per-route: 500
+spring:
+  cloud:
+    openfeign:
+      client:
+        config:
+          example-api:
+            connectTimeout: 2100
+            readTimeout: 5000
+            loggerLevel: full
+      compression:
+        response:
+          enabled: false
+      httpclient:
+        max-connections: 2000
+        max-connections-per-route: 500
 
 ---
-spring.config.activate.on-profile: local
-
-notification:
-  service:
-    url: http://localhost:9999  # Local 환경에서는 로컬 서버 URL 사용
-    exampleValue: localNotificationValue
+spring:
+  profiles:
+    active: local
 
 ---
-spring.config.activate.on-profile: dev
-
-notification:
-  service:
-    url: https://dev-notification-server.com  # 개발 환경에서는 개발 서버 URL 사용
-    exampleValue: devNotificationValue
+spring:
+  profiles:
+    active: dev
 
 ---
-spring.config.activate.on-profile: prod
-
-notification:
-  service:
-    url: https://notification-server.com  # 프로덕션 환경에서는 프로덕션 서버 URL 사용
-    exampleValue: prodNotificationValue
-
-
+spring:
+  profiles:
+    active: prod
