@@ -7,7 +7,7 @@ import org.springframework.test.context.TestConstructor;
 
 @Tag("context")
 @SpringBootTest
-@ActiveProfiles("local") // local로 되어있어도 횐경변수는 따로 맞춰줄 수 있음.
+@ActiveProfiles("test")
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 public abstract class ClientContextTest {
 
