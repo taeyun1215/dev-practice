@@ -1,4 +1,4 @@
 package com.example.demo;
 
-record NotificationResponse(String notificationStatus) {
+public record NotificationResponse(String notificationStatus) {
 }
