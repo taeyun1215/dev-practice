@@ -2,10 +2,14 @@ package com.example.demo;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Setter
+@Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "shipments")
 public class Shipment extends BaseEntity {
 

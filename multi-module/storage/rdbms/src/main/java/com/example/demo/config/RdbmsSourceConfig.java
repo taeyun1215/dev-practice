@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-class CoreDataSourceConfig {
+class RdbmsSourceConfig {
 
 	@Bean
 	@ConfigurationProperties(prefix = "storage.datasource.core")

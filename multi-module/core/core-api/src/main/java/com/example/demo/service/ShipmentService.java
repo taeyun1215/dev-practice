@@ -24,9 +24,10 @@ public class ShipmentService {
 			throw new InvalidShipmentRequestException("Invalid or missing tracking number.");
 		}
 
-		Shipment shipment = new Shipment();
-		shipment.setTrackingNumber(request.trackingNumber());
-		shipment.setStatus(ShipmentStatus.PENDING.toString()); // 초기 상태 설정
+		Shipment shipment = Shipment.builder()
+				.trackingNumber(request.trackingNumber())
+				.status(ShipmentStatus.PENDING.toString())
+				.build();
 		Shipment savedShipment = shipmentRepository.save(shipment);
 		sendShipmentOrderConfirmation(request.email(), savedShipment.getId());
 
