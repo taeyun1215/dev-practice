@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class ShipmentRepositoryIT {
+public class ShipmentRepositoryIT extends RdbmsContextTest {
 
 	@Autowired
 	private ShipmentRepository shipmentRepository;

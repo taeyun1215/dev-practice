@@ -6,4 +6,13 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    // MariaDB
+    implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.2'
+
+    // Junit (test 전용)
+    testImplementation 'org.testcontainers:junit-jupiter:1.17.6'
+
+    // MariaDB (test 전용)
+    testImplementation 'org.testcontainers:mariadb:1.17.6'
 }
