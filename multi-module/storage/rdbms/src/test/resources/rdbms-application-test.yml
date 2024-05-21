@@ -1,15 +1,15 @@
 spring:
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
 storage:
   datasource:
     core:
       driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
       jdbc-url: jdbc:tc:mariadb:10.11:///test-containers
-      username: test
-      password: test
+#      username: test
+#      password: test
       maximum-pool-size: 25
       connection-timeout: 1100
       keepalive-time: 30000
