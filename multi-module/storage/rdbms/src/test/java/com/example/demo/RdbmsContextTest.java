@@ -5,6 +5,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestConstructor;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.containers.MariaDBContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -14,13 +15,15 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @SpringBootTest
 // @ActiveProfiles("test") // application-test.yml일 경우엔 이렇게 사용
 @TestPropertySource(properties = {"spring.config.location = classpath:rdbms-application-test.yml"})
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
+// @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Sql(scripts = {"/data/init.sql"})
 public abstract class RdbmsContextTest {
 
 	// MariaDB 컨테이너 설정
 	@Container
 	static MariaDBContainer<?> MARIADB_CONTAINER = new MariaDBContainer<>("mariadb:10.11")
-		 .withInitScript("data/init.sql");
+		.withDatabaseName("test")
+		.withInitScript("data/init.sql");
 
 }

@@ -5,16 +5,16 @@ logging:
     org.hibernate.type: TRACE  # Hibernate 타입 파라미터 로깅을 트레이스 레벨로 설정
     org.testcontainers: DEBUG  # Testcontainers 로그를 디버그 레벨로 설정
 
-spring:
-  jpa:
-    hibernate:
-      ddl-auto: create
+#spring:
+#  jpa:
+#    hibernate:
+#      ddl-auto: create
 
 storage:
   datasource:
     core:
       driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
-      jdbc-url: jdbc:tc:mariadb:10.11:///test-containers
+      jdbc-url: jdbc:tc:mariadb:10.11:///
 #      username: test
 #      password: test
       maximum-pool-size: 25
