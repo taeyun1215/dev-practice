@@ -1,4 +1,4 @@
-package com.example.demo.controller.v1.payload;
+package com.example.demo.controller.payload;
 
 public class CreateShipmentDto {
 

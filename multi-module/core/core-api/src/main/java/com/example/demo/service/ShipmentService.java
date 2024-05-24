@@ -7,7 +7,7 @@ import com.example.demo.NotificationServiceClient;
 import com.example.demo.Shipment;
 import com.example.demo.ShipmentRepository;
 import com.example.demo.ShipmentStatus;
-import com.example.demo.controller.v1.payload.CreateShipmentDto;
+import com.example.demo.controller.payload.CreateShipmentDto;
 import com.example.demo.support.error.InvalidShipmentRequestException;
 
 import lombok.RequiredArgsConstructor;
