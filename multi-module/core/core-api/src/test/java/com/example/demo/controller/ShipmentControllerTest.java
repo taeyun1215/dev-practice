@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ShipmentController.class)
-public class ShipmentControllerTest {
+class ShipmentControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -25,13 +25,12 @@ public class ShipmentControllerTest {
 	private ShipmentService shipmentService;
 
 	@Test
-	public void createShipmentTest() throws Exception {
+	void createShipmentTest() throws Exception {
 		// Given
 		String trackingNumber = "123456789";
 		String email = "example@example.com";
 		Long expectedShipmentId = 1L;
 
-		CreateShipmentDto.CreateShipmentRequest request = new CreateShipmentDto.CreateShipmentRequest(trackingNumber, email);
 		when(shipmentService.createShipment(any(CreateShipmentDto.CreateShipmentRequest.class))).thenReturn(expectedShipmentId);
 
 		// When & Then
