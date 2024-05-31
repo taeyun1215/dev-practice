@@ -11,28 +11,20 @@
 
 This is the Core API documentation.
 
-== Example API
+=== Example API
 
-=== Example GET API
-==== Curl Request
-include::{snippets}/exampleGet/curl-request.adoc[]
-==== Path Parameters
-include::{snippets}/exampleGet/path-parameters.adoc[]
-==== Query Parameters
-include::{snippets}/exampleGet/query-parameters.adoc[]
+==== create-shipment API
+include::{snippets}/create-shipment/curl-request.adoc[]
 ==== Http Response
-include::{snippets}/exampleGet/http-response.adoc[]
+include::{snippets}/create-shipment/http-response.adoc[]
 ==== Response Fields
-include::{snippets}/exampleGet/response-fields.adoc[]
+include::{snippets}/create-shipment/response-fields.adoc[]
 
 '''
 
-=== Example POST API
-==== Curl Request
-include::{snippets}/examplePost/curl-request.adoc[]
-==== Request Fields
-include::{snippets}/examplePost/request-fields.adoc[]
+==== get-shipment API
+include::{snippets}/get-shipment/curl-request.adoc[]
 ==== Http Response
-include::{snippets}/examplePost/http-response.adoc[]
+include::{snippets}/get-shipment/http-response.adoc[]
 ==== Response Fields
-include::{snippets}/examplePost/response-fields.adoc[]
+include::{snippets}/get-shipment/response-fields.adoc[]

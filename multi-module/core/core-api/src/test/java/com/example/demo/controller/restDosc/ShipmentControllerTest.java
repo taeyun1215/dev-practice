@@ -8,6 +8,7 @@ import com.example.demo.controller.payload.CreateShipmentDto;
 import com.example.demo.service.ShipmentService;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.restdocs.payload.JsonFieldType;
@@ -36,6 +37,7 @@ class ShipmentControllerTest extends RestDocsTest {
     }
 
     @Test
+    @DisplayName("컨트롤러 레이어 createShipment RestDocs 테스트")
     void createShipmentTest() {
         CreateShipmentDto.CreateShipmentRequest createShipmentRequest = new CreateShipmentDto.CreateShipmentRequest("123456789", "email@example.com");
 
@@ -59,6 +61,7 @@ class ShipmentControllerTest extends RestDocsTest {
     }
 
     @Test
+    @DisplayName("컨트롤러 레이어 getShipmentTest RestDocs 테스트")
     void getShipmentTest() {
         Shipment shipment = Shipment.builder()
                 .trackingNumber("ABCDEFG")

@@ -6,6 +6,7 @@ import com.example.demo.controller.payload.CreateShipmentDto;
 import com.example.demo.service.ShipmentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -37,6 +38,7 @@ class ShipmentControllerTest {
     }
 
     @Test
+    @DisplayName("컨트롤러 레이어 createShipment 단위 테스트")
     void createShipmentTest() throws Exception {
         // Given
         CreateShipmentDto.CreateShipmentRequest createShipmentRequest = new CreateShipmentDto.CreateShipmentRequest("123456789", "user@example.com");
@@ -51,6 +53,7 @@ class ShipmentControllerTest {
     }
 
     @Test
+    @DisplayName("컨트롤러 레이어 getShipment 단위 테스트")
     void getShipmentTest() throws Exception {
         // Given
         Long shipmentId = 1L;

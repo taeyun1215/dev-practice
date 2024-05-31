@@ -36,8 +36,8 @@ class ShipmentServiceTest {
     }
 
     @Test
-    @DisplayName("유효한 요청으로 배송 생성 시 배송 ID 반환")
-    void 유효한_요청으로_배송_생성_시_배송_ID_반환() {
+    @DisplayName("서비스 레이어 createShipment 단위 테스트")
+    void createShipmentTest() {
         // Given
         CreateShipmentDto.CreateShipmentRequest request = new CreateShipmentDto.CreateShipmentRequest("123456789", "user@example.com");
         Shipment savedShipment = Shipment.builder()
@@ -58,8 +58,8 @@ class ShipmentServiceTest {
     }
 
     @Test
-    @DisplayName("트래킹 번호 누락 시 예외 발생")
-    void 트래킹_번호_누락_시_예외_발생() {
+    @DisplayName("서비스 레이어 createShipment 단위 테스트 실패 케이스")
+    void createShipmentFailTest() {
         // Given
         CreateShipmentDto.CreateShipmentRequest request = new CreateShipmentDto.CreateShipmentRequest("", "user@example.com");
 
@@ -68,8 +68,8 @@ class ShipmentServiceTest {
     }
 
     @Test
-    @DisplayName("ID로 배송 조회 시 정확한 배송 정보 반환")
-    void ID로_배송_조회_시_정확한_배송_정보_반환() {
+    @DisplayName("서비스 레이어 getShipmentById 단위 테스트")
+    void getShipmentByIdTest() {
         // Given
         Long shipmentId = 1L;
         Shipment expectedShipment = Shipment.builder()
@@ -89,8 +89,8 @@ class ShipmentServiceTest {
     }
 
     @Test
-    @DisplayName("존재하지 않는 ID로 배송 조회 시 예외 발생")
-    void 존재하지_않는_ID로_배송_조회_시_예외_발생() {
+    @DisplayName("서비스 레이어 getShipmentById 단위 테스트 실패 케이스")
+    void getShipmentByIdFailTest() {
         // Given
         Long shipmentId = 9999L;
         when(shipmentRepository.findById(shipmentId)).thenReturn(Optional.empty());
