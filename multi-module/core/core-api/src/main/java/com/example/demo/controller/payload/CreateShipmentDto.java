@@ -7,9 +7,4 @@ public class CreateShipmentDto {
 		String email
 	) {
 	}
-
-	public record CreateShipmentResponse(
-		Long shipmentId
-	) {
-	}
 }

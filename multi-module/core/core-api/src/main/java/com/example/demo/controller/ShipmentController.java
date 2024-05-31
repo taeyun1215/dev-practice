@@ -1,10 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.Shipment;
+import com.example.demo.controller.payload.GetShipmentDto;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.controller.payload.CreateShipmentDto;
 import com.example.demo.service.ShipmentService;
@@ -20,11 +19,24 @@ public class ShipmentController {
 	private final ShipmentService shipmentService;
 
 	@PostMapping
-	public SuccessApiResponse<CreateShipmentDto.CreateShipmentResponse> createShipment(
+	public SuccessApiResponse<String> createShipment(
 		@RequestBody CreateShipmentDto.CreateShipmentRequest request
 	) {
-		Long shipmentId = shipmentService.createShipment(request);
-		CreateShipmentDto.CreateShipmentResponse response = new CreateShipmentDto.CreateShipmentResponse(shipmentId);
-		return SuccessApiResponse.of(HttpStatus.CREATED.value(), response);
+		shipmentService.createShipment(request);
+		return SuccessApiResponse.of(HttpStatus.CREATED.value(), "추가가 완료되었습니다.");
+	}
+
+	@GetMapping("/{shipmentId}")
+	public SuccessApiResponse<GetShipmentDto.GetShipmentDtoResponse> getShipment(
+			@PathVariable Long shipmentId
+	) {
+		Shipment shipment = shipmentService.getShipmentById(shipmentId);
+		GetShipmentDto.GetShipmentDtoResponse response = new GetShipmentDto.GetShipmentDtoResponse(
+				shipment.getTrackingNumber(),
+				shipment.getStatus(),
+				shipment.getCreatedAt(),
+				shipment.getUpdatedAt()
+		);
+		return SuccessApiResponse.of(HttpStatus.OK.value(), response);
 	}
 }
