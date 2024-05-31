@@ -17,6 +17,6 @@ import lombok.experimental.SuperBuilder;
 public class Shipment extends BaseEntity {
 
 	private String trackingNumber;
-	private String status;
+	private ShipmentStatus status;
 
 }
