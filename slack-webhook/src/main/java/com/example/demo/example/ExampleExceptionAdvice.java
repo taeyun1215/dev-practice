@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.example.demo.global.annotation.SlackNotification;
+import com.example.demo.global.util.ErrorApiResponse;
 
 @RestControllerAdvice
 public class ExampleExceptionAdvice {
@@ -13,7 +14,7 @@ public class ExampleExceptionAdvice {
 	@SlackNotification
 	@ExceptionHandler(ExampleException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public String handleExampleException(ExampleException ex) {
-		return "Access denied due to invalid credentials: " + ex.getMessage();
+	public ErrorApiResponse handleExampleException(ExampleException ex) {
+		return ErrorApiResponse.of(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
 	}
 }
