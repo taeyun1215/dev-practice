@@ -1,11 +1,11 @@
 package com.example.demo.global;
 
-
 import lombok.RequiredArgsConstructor;
 import net.gpedro.integrations.slack.SlackApi;
 import net.gpedro.integrations.slack.SlackAttachment;
 import net.gpedro.integrations.slack.SlackField;
 import net.gpedro.integrations.slack.SlackMessage;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -29,7 +29,7 @@ public class SlackNotificationAspect {
     private final SlackApi slackApi;
     private final ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
-    @Around("@annotation(com.example.global.annotation.SlackNotification)")
+    @Around("@annotation(com.example.demo.global.annotation.SlackNotification)")
     public Object slackNotification(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         HttpServletRequest originalRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         ContentCachingRequestWrapper request = originalRequest instanceof ContentCachingRequestWrapper
