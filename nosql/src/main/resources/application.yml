@@ -8,7 +8,12 @@
 #      password: 6548
 #      database: testdb
 
+#spring:
+#  data:
+#    mongodb:
+#      uri: mongodb://root:6548@localhost:27017/testdb
+
 spring:
   data:
     mongodb:
-      uri: mongodb://root:6548@localhost:27017/testdb
+      uri: mongodb://localhost:27017/test
