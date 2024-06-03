@@ -1,5 +1,3 @@
-package nosql
-
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.15-SNAPSHOT'
@@ -22,6 +20,13 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // Mongodb
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+    // Lombok
+    implementation 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('test') {

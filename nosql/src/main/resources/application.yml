@@ -1,0 +1,14 @@
+#spring:
+#  data:
+#    mongodb:
+#      host: localhost
+#      port: 27017
+#      authentication-database: admin
+#      username: admin
+#      password: 6548
+#      database: testdb
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://root:6548@localhost:27017/testdb
