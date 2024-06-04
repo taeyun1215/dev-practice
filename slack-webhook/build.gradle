@@ -1,14 +1,14 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.7.15-SNAPSHOT'
-    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'org.springframework.boot' version '3.2.4'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 java {
-    sourceCompatibility = '11'
+    sourceCompatibility = '17'
 }
 
 repositories {
@@ -21,6 +21,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    // AOP
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
     // Slack Webhook
     implementation 'net.gpedro.integrations.slack:slack-webhook:1.4.0'
 
@@ -29,7 +32,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     // AspectJ
-    implementation 'org.aspectj:aspectjrt:1.9.6'
+//    implementation 'org.aspectj:aspectjrt:1.9.6' -> 이건 안 됨
 }
 
 tasks.named('test') {
