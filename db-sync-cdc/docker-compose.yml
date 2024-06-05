@@ -1,0 +1,44 @@
+version: '3.7'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MYSQL_DATABASE: test-db
+      MYSQL_ROOT_PASSWORD: 6548
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mariadb:/var/lib/mysql
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+
+  kafka-connect:
+    image: debezium/connect:latest
+    ports:
+      - "8083:8083"
+    environment:
+      BOOTSTRAP_SERVERS: kafka:29092
+      CONFIG_STORAGE_TOPIC: my_connect_configs
+      OFFSET_STORAGE_TOPIC: my_connect_offsets
+      STATUS_STORAGE_TOPIC: my_connect_statuses
+    depends_on:
+      - kafka
+      - mariadb

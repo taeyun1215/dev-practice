@@ -20,6 +20,29 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // MariaDB
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+    // Kafka
+    implementation 'org.springframework.kafka:spring-kafka'
+
+    // Debezium
+    implementation 'io.debezium:debezium-core:2.5.2.Final'
+    implementation 'io.debezium:debezium-embedded:2.5.2.Final'
+    implementation 'io.debezium:debezium-connector-mysql:2.5.2.Final'
+
+    // MongoDB driver
+    implementation 'org.mongodb:mongodb-driver-sync:4.2.3'
 }
 
 tasks.named('test') {
