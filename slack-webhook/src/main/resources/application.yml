@@ -1,2 +1,2 @@
 slack:
-  webhook: https://hooks.slack.com/services/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
+  webhook: ${slack_webhook}

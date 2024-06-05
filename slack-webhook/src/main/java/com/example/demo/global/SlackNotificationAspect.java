@@ -31,6 +31,7 @@ public class SlackNotificationAspect {
 
     @Around("@annotation(com.example.demo.global.annotation.SlackNotification)")
     public Object slackNotification(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        // ServletRequestAttributes 은 Spring Context 안에 들어왔을 때 관리되는 객체, Spring Context 에 들어오기 전이라면 HttpServletRequest, HttpServletResponse 로 관리가 됨.
         HttpServletRequest originalRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         ContentCachingRequestWrapper request = originalRequest instanceof ContentCachingRequestWrapper
                 ? (ContentCachingRequestWrapper) originalRequest
@@ -59,7 +60,7 @@ public class SlackNotificationAspect {
         slackMessage.setUsername("DutyPark");
 
         threadPoolTaskExecutor.execute(() -> slackApi.call(slackMessage));
-        // slackApi.call(slackMessage);
+//         slackApi.call(slackMessage);
 
         return proceedingJoinPoint.proceed();
     }
