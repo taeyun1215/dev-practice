@@ -37,9 +37,9 @@ dependencies {
     implementation 'org.springframework.kafka:spring-kafka'
 
     // Debezium
-    implementation 'io.debezium:debezium-core:2.5.2.Final'
-    implementation 'io.debezium:debezium-embedded:2.5.2.Final'
-    implementation 'io.debezium:debezium-connector-mysql:2.5.2.Final'
+    implementation 'io.debezium:debezium-api:2.6.0.Final'
+    implementation 'io.debezium:debezium-embedded:2.6.0.Final'
+    implementation 'io.debezium:debezium-connector-mysql:2.6.0.Final'
 
     // MongoDB driver
     implementation 'org.mongodb:mongodb-driver-sync:4.2.3'

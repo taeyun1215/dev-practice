@@ -2,6 +2,8 @@ package com.example.demo;
 
 import io.debezium.config.Configuration;
 import io.debezium.embedded.EmbeddedEngine;
+import io.debezium.engine.DebeziumEngine;
+import io.debezium.engine.format.Json;
 import org.apache.kafka.connect.source.SourceRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +35,7 @@ public class DatabaseChangeCaptureService {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
-            EmbeddedEngine engine = EmbeddedEngine.create()
+            DebeziumEngine engine = DebeziumEngine.create(Json.class)
                     .using(config)
                     .notifying(this::handleEvent)
                     .build();
