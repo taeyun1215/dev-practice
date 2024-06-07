@@ -1,0 +1,7 @@
+# Dockerfile
+FROM debezium/connect:latest
+
+# MongoDB Kafka Connector 다운로드 및 설치
+RUN curl -L -o /tmp/mongodb-kafka-connect-mongodb.zip https://github.com/mongodb/mongo-kafka/releases/download/r1.5.0/mongodb-kafka-connect-mongodb-1.5.0.zip && \
+    unzip /tmp/mongodb-kafka-connect-mongodb.zip -d /kafka/connect/ && \
+    rm /tmp/mongodb-kafka-connect-mongodb.zip
