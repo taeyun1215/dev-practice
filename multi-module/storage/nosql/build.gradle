@@ -14,6 +14,6 @@ dependencies {
     // Junit (test 전용)
     testImplementation 'org.testcontainers:junit-jupiter:1.17.6'
 
-    // MariaDB (test 전용)
+    // Mongodb (test 전용)
     testImplementation 'org.testcontainers:mongodb:1.17.6'
 }
