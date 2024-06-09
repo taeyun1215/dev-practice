@@ -1,0 +1,11 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/nosql-core-local
+      database: nosql-core-local-db
+logging:
+  level:
+    org.springframework.data.mongodb: DEBUG

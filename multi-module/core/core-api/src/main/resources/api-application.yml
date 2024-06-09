@@ -2,8 +2,9 @@ spring:
   config:
     import:
       - monitoring.yml
-      - logging.yml
+      - logback.yml
       - rdbms-application.yml
+      - nosql-application.yml
       - client-application.yml
   web.resources.add-mappings: false
 
