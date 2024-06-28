@@ -1,43 +1,49 @@
-package com.example.demo;
+package com.example.demo.batch.job;
 
+import com.example.demo.batch.listener.JobCompletionNotificationListener;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.entity.Grade;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
-import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@EnableBatchProcessing
-public class BatchConfiguration {
+public class GradeUpdateJobConfig {
 
     private final UserRepository userRepository;
+    private final PlatformTransactionManager transactionManager;
+    private final JobRepository jobRepository;
 
-    public BatchConfiguration(UserRepository userRepository) {
+    public GradeUpdateJobConfig(UserRepository userRepository, PlatformTransactionManager transactionManager, JobRepository jobRepository) {
         this.userRepository = userRepository;
+        this.transactionManager = transactionManager;
+        this.jobRepository = jobRepository;
     }
 
     @Bean
-    public Job job(JobBuilderFactory jobBuilderFactory, Step step) {
-        return jobBuilderFactory.get("job")
+    public Job gradeUpdateJob() {
+        return new JobBuilder("gradeUpdateJob", jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .listener(listener())
-                .flow(step)
-                .end()
+                .start(gradeUpdateStep())
                 .build();
     }
 
     @Bean
-    public Step step(StepBuilderFactory stepBuilderFactory) {
-        return stepBuilderFactory.get("step")
+    public Step gradeUpdateStep() {
+        return new StepBuilder("gradeUpdateStep", jobRepository)
                 .tasklet((contribution, chunkContext) -> {
                     updateGrades();
                     return RepeatStatus.FINISHED;
-                })
+                }, transactionManager)
                 .build();
     }
 
