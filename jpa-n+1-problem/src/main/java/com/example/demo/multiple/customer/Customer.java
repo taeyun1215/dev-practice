@@ -2,10 +2,7 @@ package com.example.demo.multiple.customer;
 
 import com.example.demo.multiple.review.Review;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -16,8 +13,8 @@ import java.util.List;
 @Entity
 @Builder
 @Table(name = "customers")
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Customer {
 
 	@Id

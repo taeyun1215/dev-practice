@@ -16,8 +16,8 @@ import java.util.UUID;
 @Getter
 @Builder
 @Table(name = "user_ulid")
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserULID {
 
     @Id

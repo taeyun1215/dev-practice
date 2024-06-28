@@ -2,10 +2,7 @@ package com.example.demo.multiple.review;
 
 import com.example.demo.multiple.customer.Customer;
 import com.example.demo.multiple.product.Product;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,8 +10,8 @@ import javax.persistence.*;
 @Entity
 @Builder
 @Table(name = "reviews")
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Review {
 
     @Id

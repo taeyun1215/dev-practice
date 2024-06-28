@@ -12,8 +12,8 @@ import javax.persistence.*;
 @Entity
 @Builder
 @Table(name = "posts")
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class PostJpaEntity {
 
     @Id

@@ -2,10 +2,7 @@ package com.example.demo.multiple.product;
 
 import com.example.demo.multiple.category.Category;
 import com.example.demo.multiple.review.Review;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,8 +12,8 @@ import java.util.List;
 @Entity
 @Builder
 @Table(name = "products")
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Product {
 
     @Id

@@ -9,8 +9,8 @@ import javax.persistence.Id;
 
 @Entity
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserSnowflake {
 
     @Id

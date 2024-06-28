@@ -3,6 +3,7 @@ package com.example.demo.batch.job;
 import com.example.demo.batch.listener.JobCompletionNotificationListener;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.entity.Grade;
+import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
@@ -16,17 +17,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
+@RequiredArgsConstructor
 public class GradeUpdateJobConfig {
 
     private final UserRepository userRepository;
     private final PlatformTransactionManager transactionManager;
     private final JobRepository jobRepository;
-
-    public GradeUpdateJobConfig(UserRepository userRepository, PlatformTransactionManager transactionManager, JobRepository jobRepository) {
-        this.userRepository = userRepository;
-        this.transactionManager = transactionManager;
-        this.jobRepository = jobRepository;
-    }
 
     @Bean
     public Job gradeUpdateJob() {
@@ -54,7 +50,7 @@ public class GradeUpdateJobConfig {
             } else if (user.getTotalSpent() > 3000) {
                 user.setGrade(Grade.PLATINUM);
             } else if (user.getTotalSpent() > 1000) {
-                user.setGrade(Grade.GOLD);
+                user.setGrade(Grade.GOLD); 
             } else if (user.getTotalSpent() > 500) {
                 user.setGrade(Grade.SILVER);
             } else {

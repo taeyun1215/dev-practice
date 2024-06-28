@@ -12,8 +12,8 @@ import javax.persistence.*;
 @Table(name = "reviews111")
 @Getter
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ReviewJpaEntity {
 
     @Id

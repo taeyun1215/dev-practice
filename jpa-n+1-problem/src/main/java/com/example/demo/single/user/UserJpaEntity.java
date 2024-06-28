@@ -14,8 +14,8 @@ import java.util.List;
 @Table(name = "users")
 @Getter
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserJpaEntity {
     @Id
     @GeneratedValue
