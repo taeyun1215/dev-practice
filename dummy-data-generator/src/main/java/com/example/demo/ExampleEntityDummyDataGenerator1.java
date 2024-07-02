@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class ExampleEntityDummyDataGenerator {
+public class ExampleEntityDummyDataGenerator1 {
 
     private static final String DB_URL = "jdbc:mariadb://localhost:3306/example-db";
     private static final String DB_USER = "root";
@@ -34,8 +34,8 @@ public class ExampleEntityDummyDataGenerator {
 
         // 데이터 생성을 위한 PreparedStatement 준비
         try (PreparedStatement pstmt = conn.prepareStatement(insertQuery)) {
-            // 더미 데이터 개수 (여기서는 1000개로 가정)
-            int numberOfDummyData = 1000;
+            // 더미 데이터 개수 (여기서는 100,000개로 가정)
+            int numberOfDummyData = 100000;
 
             for (int i = 1; i <= numberOfDummyData; i++) {
                 pstmt.setString(1, "name" + i); // name
