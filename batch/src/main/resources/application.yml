@@ -4,11 +4,18 @@ spring:
     username: root
     password: 6548
     driver-class-name: org.mariadb.jdbc.Driver
+    schema: classpath:schema-mariadb.sql
 
   jpa:
-    database-platform: org.hibernate.dialect.MariaDBDialect
     hibernate:
       ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
 
   batch:
     initialize-schema: always
+    job:
+      enabled: true
