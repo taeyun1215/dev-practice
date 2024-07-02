@@ -20,7 +20,7 @@ public class SchedulerConfig {
     private final JobLauncher jobLauncher;
     private final Job job;
 
-    @Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul")
+    @Scheduled(cron = "0 * * * * *", zone = "Asia/Seoul")
     public void perform() throws Exception {
         JobParameters params = new JobParametersBuilder()
                 .addDate("date", new Date())
