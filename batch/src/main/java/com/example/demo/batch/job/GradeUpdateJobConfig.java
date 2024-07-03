@@ -45,7 +45,7 @@ public class GradeUpdateJobConfig {
 
     @Bean
     public Step gradeUpdateStep() {
-        return new StepBuilder("gradeUpdateStep", jobRepository)
+        return new StepBuilder("registerUserAPI", jobRepository)
                 .<User, User>chunk(1000, transactionManager)
                 .reader(reader())
                 .processor(processor())
