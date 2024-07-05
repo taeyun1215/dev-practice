@@ -4,6 +4,7 @@ import com.example.demo.batch.listener.JobCompletionNotificationListener;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.entity.Grade;
+import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
@@ -13,26 +14,26 @@ import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
-import org.springframework.batch.item.data.RepositoryItemReader;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.batch.item.database.JpaCursorItemReader;
+import org.springframework.batch.item.database.builder.JpaCursorItemReaderBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.domain.Sort;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Configuration
 @RequiredArgsConstructor
-public class GradeUpdateJobConfig {
+public class GradeUpdateJobConfig2 {
 
     private final UserRepository userRepository;
     private final PlatformTransactionManager transactionManager;
     private final JobRepository jobRepository;
+    private final EntityManagerFactory entityManagerFactory;
 
     @Bean
     public Job gradeUpdateJob() {
@@ -55,12 +56,12 @@ public class GradeUpdateJobConfig {
 
     @Bean
     @StepScope
-    public RepositoryItemReader<User> reader() {
-        RepositoryItemReader<User> reader = new RepositoryItemReader<>();
-        reader.setRepository(userRepository);
-        reader.setMethodName("findAll");
-        reader.setSort(Collections.singletonMap("id", Sort.Direction.ASC));
-        return reader;
+    public JpaCursorItemReader<User> reader() {
+        return new JpaCursorItemReaderBuilder<User>()
+                .name("userReader")
+                .entityManagerFactory(entityManagerFactory)
+                .queryString("SELECT u FROM User u ORDER BY u.id")
+                .build();
     }
 
     @Bean
