@@ -1,6 +1,5 @@
 package com.example.demo.batch.job;
 
-import com.example.demo.batch.listener.JobCompletionNotificationListener;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.entity.Grade;
@@ -34,31 +33,32 @@ public class GradeUpdateJobConfig2 {
     private final PlatformTransactionManager transactionManager;
     private final JobRepository jobRepository;
     private final EntityManagerFactory entityManagerFactory;
+    private final JobExecutionListener listener;
 
     @Bean
-    public Job gradeUpdateJob() {
-        return new JobBuilder("gradeUpdateJob", jobRepository)
+    public Job gradeUpdateJob2() {
+        return new JobBuilder("gradeUpdateJob2", jobRepository)
                 .incrementer(new RunIdIncrementer())
-                .listener(listener())
-                .start(gradeUpdateStep())
+                .listener(listener)
+                .start(gradeUpdateStep2())
                 .build();
     }
 
     @Bean
-    public Step gradeUpdateStep() {
-        return new StepBuilder("registerUserAPI", jobRepository)
+    public Step gradeUpdateStep2() {
+        return new StepBuilder("gradeUpdateStep2", jobRepository)
                 .<User, User>chunk(1000, transactionManager)
-                .reader(reader())
-                .processor(processor())
-                .writer(writer())
+                .reader(reader2())
+                .processor(processor2())
+                .writer(writer2())
                 .build();
     }
 
     @Bean
     @StepScope
-    public JpaCursorItemReader<User> reader() {
+    public JpaCursorItemReader<User> reader2() {
         return new JpaCursorItemReaderBuilder<User>()
-                .name("userReader")
+                .name("userReader2")
                 .entityManagerFactory(entityManagerFactory)
                 .queryString("SELECT u FROM User u ORDER BY u.id")
                 .build();
@@ -66,7 +66,7 @@ public class GradeUpdateJobConfig2 {
 
     @Bean
     @StepScope
-    public ItemProcessor<User, User> processor() {
+    public ItemProcessor<User, User> processor2() {
         return user -> {
             Grade originalGrade = user.getGrade();
             Grade newGrade = calculateGrade(user.getTotalSpent());
@@ -93,7 +93,7 @@ public class GradeUpdateJobConfig2 {
 
     @Bean
     @StepScope
-    public ItemWriter<User> writer() {
+    public ItemWriter<User> writer2() {
         return chunk -> {
             List<User> filteredItems = chunk.getItems().stream()
                     .filter(Objects::nonNull)
@@ -102,10 +102,5 @@ public class GradeUpdateJobConfig2 {
                 userRepository.saveAll(filteredItems);
             }
         };
-    }
-
-    @Bean
-    public JobExecutionListener listener() {
-        return new JobCompletionNotificationListener();
     }
 }

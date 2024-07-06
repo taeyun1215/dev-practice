@@ -1,9 +1,7 @@
 package com.example.demo.batch.job;
 
-import com.example.demo.batch.listener.JobCompletionNotificationListener;
 import com.example.demo.entity.Grade;
 import com.example.demo.entity.UserProjection;
-import com.example.demo.repository.UserRepository;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -34,33 +32,33 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class GradeUpdateJobConfig5 {
 
-    private final UserRepository userRepository;
     private final PlatformTransactionManager transactionManager;
     private final JobRepository jobRepository;
     private final EntityManagerFactory entityManagerFactory;
     private final DataSource dataSource;
+    private final JobExecutionListener listener;
 
     @Bean
-    public Job gradeUpdateJob() {
-        return new JobBuilder("gradeUpdateJob", jobRepository)
+    public Job gradeUpdateJob5() {
+        return new JobBuilder("gradeUpdateJob5", jobRepository)
                 .incrementer(new RunIdIncrementer())
-                .listener(listener())
-                .start(gradeUpdateStep())
+                .listener(listener)
+                .start(gradeUpdateStep5())
                 .build();
     }
 
     @Bean
-    public Step gradeUpdateStep() {
-        return new StepBuilder("gradeUpdateStep", jobRepository)
+    public Step gradeUpdateStep5() {
+        return new StepBuilder("gradeUpdateStep5", jobRepository)
                 .<UserProjection, UserProjection>chunk(1000, transactionManager)
-                .reader(reader())
-                .writer(writer())
+                .reader(reader5())
+                .writer(writer5())
                 .build();
     }
 
     @Bean
     @StepScope
-    public JpaCursorItemReader<UserProjection> reader() {
+    public JpaCursorItemReader<UserProjection> reader5() {
         return new JpaCursorItemReaderBuilder<UserProjection>()
                 .name("userReader")
                 .entityManagerFactory(entityManagerFactory)
@@ -70,7 +68,7 @@ public class GradeUpdateJobConfig5 {
 
     @Bean
     @StepScope
-    public ItemWriter<UserProjection> writer() {
+    public ItemWriter<UserProjection> writer5() {
         return chunk -> {
             List<? extends UserProjection> users = chunk.getItems();
 
@@ -123,10 +121,5 @@ public class GradeUpdateJobConfig5 {
         } else {
             return Grade.BRONZE;
         }
-    }
-
-    @Bean
-    public JobExecutionListener listener() {
-        return new JobCompletionNotificationListener();
     }
 }

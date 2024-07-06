@@ -1,6 +1,5 @@
 package com.example.demo.batch.job;
 
-import com.example.demo.batch.listener.JobCompletionNotificationListener;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.entity.Grade;
@@ -33,19 +32,20 @@ public class GradeUpdateJobConfig1 {
     private final UserRepository userRepository;
     private final PlatformTransactionManager transactionManager;
     private final JobRepository jobRepository;
+    private final JobExecutionListener listener;
 
     @Bean
     public Job gradeUpdateJob() {
-        return new JobBuilder("gradeUpdateJob", jobRepository)
+        return new JobBuilder("gradeUpdateJob1", jobRepository)
                 .incrementer(new RunIdIncrementer())
-                .listener(listener())
+                .listener(listener)
                 .start(gradeUpdateStep())
                 .build();
     }
 
     @Bean
     public Step gradeUpdateStep() {
-        return new StepBuilder("gradeUpdateStep", jobRepository)
+        return new StepBuilder("gradeUpdateStep1", jobRepository)
                 .<User, User>chunk(1000, transactionManager)
                 .reader(reader())
                 .processor(processor())
@@ -101,10 +101,5 @@ public class GradeUpdateJobConfig1 {
                 userRepository.saveAll(filteredItems);
             }
         };
-    }
-
-    @Bean
-    public JobExecutionListener listener() {
-        return new JobCompletionNotificationListener();
     }
 }

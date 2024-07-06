@@ -1,6 +1,5 @@
 package com.example.demo.batch.job;
 
-import com.example.demo.batch.listener.JobCompletionNotificationListener;
 import com.example.demo.entity.Grade;
 import com.example.demo.entity.UserProjection;
 import com.example.demo.repository.UserRepository;
@@ -34,28 +33,29 @@ public class GradeUpdateJobConfig4 {
     private final PlatformTransactionManager transactionManager;
     private final JobRepository jobRepository;
     private final EntityManagerFactory entityManagerFactory;
+    private final JobExecutionListener listener;
 
     @Bean
-    public Job gradeUpdateJob() {
-        return new JobBuilder("gradeUpdateJob", jobRepository)
+    public Job gradeUpdateJob4() {
+        return new JobBuilder("gradeUpdateJob4", jobRepository)
                 .incrementer(new RunIdIncrementer())
-                .listener(listener())
-                .start(gradeUpdateStep())
+                .listener(listener)
+                .start(gradeUpdateStep4())
                 .build();
     }
 
     @Bean
-    public Step gradeUpdateStep() {
-        return new StepBuilder("gradeUpdateStep", jobRepository)
+    public Step gradeUpdateStep4() {
+        return new StepBuilder("gradeUpdateStep4", jobRepository)
                 .<UserProjection, UserProjection>chunk(1000, transactionManager)
-                .reader(reader())
-                .writer(writer())
+                .reader(reader4())
+                .writer(writer4())
                 .build();
     }
 
     @Bean
     @StepScope
-    public JpaCursorItemReader<UserProjection> reader() {
+    public JpaCursorItemReader<UserProjection> reader4() {
         return new JpaCursorItemReaderBuilder<UserProjection>()
                 .name("userReader")
                 .entityManagerFactory(entityManagerFactory)
@@ -65,7 +65,7 @@ public class GradeUpdateJobConfig4 {
 
     @Bean
     @StepScope
-    public ItemWriter<UserProjection> writer() {
+    public ItemWriter<UserProjection> writer4() {
         return chunk -> {
             // 새로운 등급으로 그룹화하여 ID 목록을 생성
             Map<Grade, List<Long>> gradeGroups = chunk.getItems().stream()
@@ -96,10 +96,5 @@ public class GradeUpdateJobConfig4 {
         } else {
             return Grade.BRONZE;
         }
-    }
-
-    @Bean
-    public JobExecutionListener listener() {
-        return new JobCompletionNotificationListener();
     }
 }

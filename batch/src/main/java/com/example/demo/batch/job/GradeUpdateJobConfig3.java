@@ -15,16 +15,12 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.data.RepositoryItemReader;
-import org.springframework.batch.item.data.RepositoryItemWriter;
 import org.springframework.batch.item.database.JpaCursorItemReader;
 import org.springframework.batch.item.database.builder.JpaCursorItemReaderBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
-import java.util.AbstractMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.Objects;
 
@@ -36,28 +32,29 @@ public class GradeUpdateJobConfig3 {
     private final PlatformTransactionManager transactionManager;
     private final JobRepository jobRepository;
     private final EntityManagerFactory entityManagerFactory;
+    private final JobExecutionListener listener;
 
     @Bean
-    public Job gradeUpdateJob() {
-        return new JobBuilder("gradeUpdateJob", jobRepository)
+    public Job gradeUpdateJob3() {
+        return new JobBuilder("gradeUpdateJob3", jobRepository)
                 .incrementer(new RunIdIncrementer())
-                .listener(listener())
-                .start(gradeUpdateStep())
+                .listener(listener)
+                .start(gradeUpdateStep3())
                 .build();
     }
 
     @Bean
-    public Step gradeUpdateStep() {
-        return new StepBuilder("gradeUpdateStep", jobRepository)
+    public Step gradeUpdateStep3() {
+        return new StepBuilder("gradeUpdateStep3", jobRepository)
                 .<User, User>chunk(1000, transactionManager)
-                .reader(reader())
-                .writer(writer())
+                .reader(reader3())
+                .writer(writer3())
                 .build();
     }
 
     @Bean
     @StepScope
-    public JpaCursorItemReader<User> reader() {
+    public JpaCursorItemReader<User> reader3() {
         return new JpaCursorItemReaderBuilder<User>()
                 .name("userReader")
                 .entityManagerFactory(entityManagerFactory)
@@ -67,7 +64,7 @@ public class GradeUpdateJobConfig3 {
 
     @Bean
     @StepScope
-    public ItemWriter<User> writer() {
+    public ItemWriter<User> writer3() {
         return chunk -> {
             List<User> updatedUsers = chunk.getItems().stream()
                     .map(user -> {
@@ -97,10 +94,5 @@ public class GradeUpdateJobConfig3 {
         } else {
             return Grade.BRONZE;
         }
-    }
-
-    @Bean
-    public JobExecutionListener listener() {
-        return new JobCompletionNotificationListener();
     }
 }

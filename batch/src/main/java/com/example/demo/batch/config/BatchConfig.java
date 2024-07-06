@@ -1,6 +1,8 @@
 package com.example.demo.batch.config;
 
+import com.example.demo.batch.listener.JobCompletionNotificationListener;
 import lombok.RequiredArgsConstructor;
+import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.repository.support.JobRepositoryFactoryBean;
@@ -27,5 +29,10 @@ public class BatchConfig {
         factory.setTablePrefix("BATCH_");
         factory.afterPropertiesSet();
         return factory.getObject();
+    }
+
+    @Bean
+    public JobExecutionListener listener() {
+        return new JobCompletionNotificationListener();
     }
 }
