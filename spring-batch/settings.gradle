@@ -6,4 +6,4 @@ pluginManagement {
 	}
 }
 
-rootProject.name = 'batch'
+rootProject.name = 'spring-batch'
