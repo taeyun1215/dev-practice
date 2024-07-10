@@ -18,8 +18,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
-        boolean isAuthenticated = userService.login(username, password);
+    public ResponseEntity<String> loginUser(@RequestParam String username, @RequestParam String password) {
+        boolean isAuthenticated = userService.loginUser(username, password);
         if (isAuthenticated) {
             return ResponseEntity.ok("User logged in successfully");
         } else {
