@@ -16,6 +16,11 @@ repositories {
 }
 
 dependencies {
+    if (project.hasProperty('local')) {
+        implementation project(':common-config')
+    }
+
+    // Built In
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
@@ -30,7 +35,7 @@ dependencies {
     // JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-    // MariaDb
+    // Maria DB
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
     // Gson
