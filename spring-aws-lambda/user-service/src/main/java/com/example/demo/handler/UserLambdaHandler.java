@@ -7,12 +7,14 @@ import com.amazonaws.serverless.proxy.spring.SpringBootLambdaContainerHandler;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 import com.example.demo.DemoApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class StreamLambdaHandler implements RequestStreamHandler {
+@ComponentScan(basePackages = "com.example.demo.config")
+public class UserLambdaHandler implements RequestStreamHandler {
     private static SpringBootLambdaContainerHandler<AwsProxyRequest, AwsProxyResponse> handler;
     static {
         try {
