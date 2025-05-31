@@ -1,0 +1,9 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+notification:
+  service:
+    url: https://notification-server.com
+    exampleValue: prodNotificationValue

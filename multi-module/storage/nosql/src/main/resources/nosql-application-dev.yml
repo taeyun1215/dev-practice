@@ -1,0 +1,11 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  data:
+    mongodb:
+      uri: mongodb://${DEV_MONGO_URL}/nosql-core-dev
+      database: nosql-core-dev-db
+logging:
+  level:
+    org.springframework.data.mongodb: INFO

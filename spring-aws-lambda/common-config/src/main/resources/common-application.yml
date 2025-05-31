@@ -1,0 +1,4 @@
+redis:
+#  host: spring-aws-lambda-notfro.serverless.apn2.cache.amazonaws.com
+  host: localhost
+  port: 6379

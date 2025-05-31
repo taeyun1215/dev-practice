@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  springboot-app:
+    container_name: springboot-container-green
+    build:
+      context: .
+      dockerfile: springboot-dockerfile
+    image: springboot-app:green
+    ports:
+      - "8082:8080"

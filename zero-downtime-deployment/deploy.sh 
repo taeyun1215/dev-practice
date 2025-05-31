@@ -1,0 +1,47 @@
+# Docker 컨테이너 이름과 Nginx 설정 파일의 위치
+NGINX_CONTAINER="nginx_container"
+NGINX_CONF="/etc/nginx/conf.d/default.conf"
+
+# Nginx 설정 파일에서 현재 포트 확인
+CURRENT_PORT=$(docker exec $NGINX_CONTAINER cat $NGINX_CONF | grep "proxy_pass" | grep -o '[0-9]*')
+
+# 현재 포트에 따라 환경 설정
+if [ "$CURRENT_PORT" = "8081" ]; then
+    NEW_PORT="8082"
+    OLD_ENV="blue"
+    NEW_ENV="green"
+    DOCKER_COMPOSE_NEW="docker-compose.green.yml"
+    DOCKER_COMPOSE_OLD="docker-compose.blue.yml"
+else
+    NEW_PORT="8081"
+    OLD_ENV="green"
+    NEW_ENV="blue"
+    DOCKER_COMPOSE_NEW="docker-compose.blue.yml"
+    DOCKER_COMPOSE_OLD="docker-compose.green.yml"
+fi
+
+# 새 환경 배포
+echo "Deploying $NEW_ENV environment..."
+docker-compose -f $DOCKER_COMPOSE_NEW up -d
+
+# 건강 검사 수행
+echo "Checking health of $NEW_ENV environment..."
+sleep 10  # 실제 환경에서는 더 정교한 건강 검사가 필요합니다.
+if curl -s http://localhost:$NEW_PORT/health | grep 'status: UP'; then
+    echo "$NEW_ENV environment is healthy."
+
+    # Nginx 설정 변경
+    echo "Switching traffic to $NEW_ENV environment..."
+    docker exec $NGINX_CONTAINER sed -i "s/$CURRENT_PORT/$NEW_PORT/g" $NGINX_CONF
+    docker exec $NGINX_CONTAINER nginx -s reload
+
+    # 이전 환경 중지
+    echo "Stopping $OLD_ENV environment..."
+    docker-compose -f $DOCKER_COMPOSE_OLD down
+
+    echo "Deployment and switch successful!"
+else
+    echo "Health check failed. Rolling back..."
+    docker-compose -f $DOCKER_COMPOSE_NEW down
+    exit 1
+fi

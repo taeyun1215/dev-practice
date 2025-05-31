@@ -1,0 +1,5 @@
+rootProject.name = 'spring-aws-lambda'
+
+include 'common-config'
+include 'user-service'
+include 'order-service'

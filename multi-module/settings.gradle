@@ -1,0 +1,19 @@
+pluginManagement {
+    plugins {
+        id 'org.springframework.boot' version "${springBootVersion}"
+        id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+        id 'org.asciidoctor.jvm.convert' version "${asciidoctorConvertVersion}"
+        id 'io.spring.javaformat' version "${springJavaFormatVersion}"
+    }
+}
+
+rootProject.name = 'multi-module'
+
+include 'core:core-enum'
+include 'core:core-api'
+include 'storage:rdbms'
+include 'storage:nosql'
+include 'tests:api-docs'
+include 'support:logging'
+include 'support:monitoring'
+include 'client'

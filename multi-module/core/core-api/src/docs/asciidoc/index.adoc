@@ -1,0 +1,30 @@
+= API Docs
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+:snippets: build/generated-snippets
+
+== Introduce
+
+This is the Core API documentation.
+
+=== Example API
+
+==== create-shipment API
+include::{snippets}/create-shipment/curl-request.adoc[]
+==== Http Response
+include::{snippets}/create-shipment/http-response.adoc[]
+==== Response Fields
+include::{snippets}/create-shipment/response-fields.adoc[]
+
+'''
+
+==== get-shipment API
+include::{snippets}/get-shipment/curl-request.adoc[]
+==== Http Response
+include::{snippets}/get-shipment/http-response.adoc[]
+==== Response Fields
+include::{snippets}/get-shipment/response-fields.adoc[]

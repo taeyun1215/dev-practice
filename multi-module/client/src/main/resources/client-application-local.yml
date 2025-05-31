@@ -1,0 +1,9 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+notification:
+  service:
+    url: http://localhost:9999
+    exampleValue: localNotificationValue

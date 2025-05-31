@@ -1,0 +1,11 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+  data:
+    mongodb:
+      uri: mongodb://${PROD_MONGO_URL}/nosql-core-prod
+      database: nosql-core-prod-db
+logging:
+  level:
+    org.springframework.data.mongodb: ERROR

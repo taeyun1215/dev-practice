@@ -1,0 +1,30 @@
+spring:
+  cloud:
+    openfeign:
+      client:
+        config:
+          example-api:
+            connectTimeout: 2100
+            readTimeout: 5000
+            loggerLevel: full
+      compression:
+        response:
+          enabled: false
+      httpclient:
+        max-connections: 2000
+        max-connections-per-route: 500
+
+---
+spring:
+  profiles:
+    active: local
+
+---
+spring:
+  profiles:
+    active: dev
+
+---
+spring:
+  profiles:
+    active: prod
